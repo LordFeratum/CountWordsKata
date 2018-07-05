@@ -5,4 +5,5 @@ def filesystem_loader(bookname):
     path = path_join('src/texts/', bookname)
     with open(path) as fp:
         for line in fp.readlines():
-            yield line
+            for token in line.split():
+                yield token
