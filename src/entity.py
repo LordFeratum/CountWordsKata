@@ -11,3 +11,10 @@ class Count:
     def items(self):
         for token, count in self._count.items():
             yield token, count
+
+    def __getitem__(self, key):
+        return self._count.get(key, 0)
+
+    def __repr__(self):
+        total = len(self._count.keys())
+        return f'<Count elements={total}>'

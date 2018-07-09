@@ -1,5 +1,7 @@
 FROM python:3.6-alpine3.4
 
+ARG reqs=base
+
 RUN apk --no-cache add \
       ca-certificates \
       openssl-dev \
@@ -12,9 +14,13 @@ ENV PYTHONDONTWRITEBYTECODE=1
 
 WORKDIR /app
 
-COPY requirements.txt /app/requirements.txt
-RUN pip install -r /app/requirements.txt
+COPY requirements /app/requirements
+RUN pip install -r /app/requirements/${reqs}.txt
 
 COPY . /app
 
-CMD ["python", "src/word_count.py"]
+COPY docker/entrypoint.sh /usr/local/bin/
+
+ENTRYPOINT ["entrypoint.sh"]
+
+CMD ["run"]

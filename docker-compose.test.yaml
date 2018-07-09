@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  word-count:
+    command: run_test
+    build:
+      context: .
+      args:
+        reqs: test
